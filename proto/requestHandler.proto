@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+
+option objc_class_prefix = "HLW";
+
+package requestHandler;
+
+// The greeting service definition.
+service RequestHandler {
+  // Sends a greeting
+  rpc HandleRequest (Request) returns (Responce) {}
+}
+
+// The request message containing the user's name.
+message Request {
+  string message = 1;
+}
+
+// The response message containing the greetings
+message Responce {
+  string message = 1;
+}

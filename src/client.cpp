@@ -4,34 +4,30 @@
 #include <sstream>
 
 #include <grpcpp/grpcpp.h>
+#include "../proto/requestHandler.grpc.pb.h"
 
-#ifdef BAZEL_BUILD
-#include "examples/protos/helloworld.grpc.pb.h"
-#else
-#include "../proto/helloworld.grpc.pb.h"
-#endif
 
 using grpc::Channel;
 using grpc::ClientContext;
 using grpc::Status;
-using helloworld::HelloRequest;
-using helloworld::HelloReply;
-using helloworld::Greeter;
+using requestHandler::Request;
+using requestHandler::Responce;
+using requestHandler::RequestHandler;
 
-class GreeterClient {
+class RequestHandlerClient {
  public:
-  GreeterClient(std::shared_ptr<Channel> channel)
-      : stub_(Greeter::NewStub(channel)) {}
+  RequestHandlerClient(std::shared_ptr<Channel> channel)
+      : stub_(RequestHandler::NewStub(channel)) {}
 
-  std::string SayHello(const std::string& user) {
-    HelloRequest request;
-    request.set_name(user);
+  std::string HandleRequest(const std::string& data) {
+    Request request;
+    request.set_message(data);
 
-    HelloReply reply;
+    Responce reply;
 
     ClientContext context;
 
-    Status status = stub_->SayHello(&context, request, &reply);
+    Status status = stub_->HandleRequest(&context, request, &reply);
 
     if (status.ok()) {
       return reply.message();
@@ -43,7 +39,7 @@ class GreeterClient {
   }
 
  private:
-  std::unique_ptr<Greeter::Stub> stub_;
+  std::unique_ptr<RequestHandler::Stub> stub_;
 };
 
 int main(int argc, char** argv) {
@@ -67,7 +63,7 @@ int main(int argc, char** argv) {
   } else {
     target_str = "localhost:50051";
   }
-  GreeterClient greeter(grpc::CreateChannel(
+  RequestHandlerClient rhc(grpc::CreateChannel(
       target_str, grpc::InsecureChannelCredentials()));
 
   int arraySize = 0;
@@ -82,7 +78,7 @@ int main(int argc, char** argv) {
   }
 
   std::string request = ss.str();
-  std::string response = greeter.SayHello(request);
+  std::string response = rhc.HandleRequest(request);
   std::cout << "Server response: " << response << std::endl;
 
   return  0;

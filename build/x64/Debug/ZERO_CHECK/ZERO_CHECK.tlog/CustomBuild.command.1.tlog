@@ -1,6 +1,6 @@
 ^C:\USERS\USER\TESTPIXELPLEX\BUILD\CMAKEFILES\A1F07274E51D2C73B5BECB68BDC36A3D\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/TestPixelPlex -BC:/Users/user/TestPixelPlex/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/user/TestPixelPlex/build/grpc_example.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/TestPixelPlex -BC:/Users/user/TestPixelPlex/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/user/TestPixelPlex/build/TestPixelPlex.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

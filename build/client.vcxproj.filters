@@ -4,10 +4,10 @@
     <ClCompile Include="C:\Users\user\TestPixelPlex\src\client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\user\TestPixelPlex\proto\helloworld.grpc.pb.cc">
+    <ClCompile Include="C:\Users\user\TestPixelPlex\proto\requestHandler.grpc.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\user\TestPixelPlex\proto\helloworld.pb.cc">
+    <ClCompile Include="C:\Users\user\TestPixelPlex\proto\requestHandler.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

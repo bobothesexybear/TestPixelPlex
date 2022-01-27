@@ -8,19 +8,16 @@
 #include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 
-#ifdef BAZEL_BUILD
-#include "examples/protos/helloworld.grpc.pb.h"
-#else
-#include "../proto/helloworld.grpc.pb.h"
-#endif
+#include "../proto/requestHandler.grpc.pb.h"
+
 
 using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
-using helloworld::HelloRequest;
-using helloworld::HelloReply;
-using helloworld::Greeter;
+using requestHandler::Request;
+using requestHandler::Responce;
+using requestHandler::RequestHandler;
 
 int getSubArrayLength(const std::vector<int>& values){
 	std::vector<int> temp = values;
@@ -51,11 +48,11 @@ int getSubArrayLength(const std::vector<int>& values){
 	return results.back();
 }
 
-class GreeterServiceImpl final : public Greeter::Service {
-  Status SayHello(ServerContext* context, const HelloRequest* request,
-                  HelloReply* reply) override {
+class RequestHandlerServiceImpl final : public RequestHandler::Service {
+  Status HandleRequest(ServerContext* context, const Request* request,
+                  Responce* reply) override {
     
-    std::stringstream data(request->name());
+    std::stringstream data(request->message());
     std::vector<int> parsedData;
     std::string strData = data.str();
     std::cout << std::endl << "Recieved data: " << strData;
@@ -76,7 +73,7 @@ class GreeterServiceImpl final : public Greeter::Service {
 
 void RunServer() {
   std::string server_address("0.0.0.0:50051");
-  GreeterServiceImpl service;
+  RequestHandlerServiceImpl service;
 
   grpc::EnableDefaultHealthCheckService(true);
   grpc::reflection::InitProtoReflectionServerBuilderPlugin();
