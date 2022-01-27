@@ -1,0 +1,4 @@
+C:/Users/user/TestPixelPlex/build/CMakeFiles/server.dir
+C:/Users/user/TestPixelPlex/build/CMakeFiles/client.dir
+C:/Users/user/TestPixelPlex/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/user/TestPixelPlex/build/CMakeFiles/ZERO_CHECK.dir
